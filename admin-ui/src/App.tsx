@@ -9,6 +9,14 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
+import { WishlistList } from "./wishlist/WishlistList";
+import { WishlistCreate } from "./wishlist/WishlistCreate";
+import { WishlistEdit } from "./wishlist/WishlistEdit";
+import { WishlistShow } from "./wishlist/WishlistShow";
+import { ProductList } from "./product/ProductList";
+import { ProductCreate } from "./product/ProductCreate";
+import { ProductEdit } from "./product/ProductEdit";
+import { ProductShow } from "./product/ProductShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -41,6 +49,20 @@ const App = (): React.ReactElement => {
           edit={UserEdit}
           create={UserCreate}
           show={UserShow}
+        />
+        <Resource
+          name="Wishlist"
+          list={WishlistList}
+          edit={WishlistEdit}
+          create={WishlistCreate}
+          show={WishlistShow}
+        />
+        <Resource
+          name="Product"
+          list={ProductList}
+          edit={ProductEdit}
+          create={ProductCreate}
+          show={ProductShow}
         />
       </Admin>
     </div>
