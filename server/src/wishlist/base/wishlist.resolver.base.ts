@@ -27,7 +27,6 @@ import { WishlistFindUniqueArgs } from "./WishlistFindUniqueArgs";
 import { Wishlist } from "./Wishlist";
 import { ProductFindManyArgs } from "../../product/base/ProductFindManyArgs";
 import { Product } from "../../product/base/Product";
-import { User } from "../../user/base/User";
 import { WishlistService } from "../wishlist.service";
 
 @graphql.Resolver(() => Wishlist)
@@ -99,15 +98,7 @@ export class WishlistResolverBase {
   ): Promise<Wishlist> {
     return await this.service.create({
       ...args,
-      data: {
-        ...args.data,
-
-        user: args.data.user
-          ? {
-              connect: args.data.user,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -124,15 +115,7 @@ export class WishlistResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: {
-          ...args.data,
-
-          user: args.data.user
-            ? {
-                connect: args.data.user,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -183,21 +166,5 @@ export class WishlistResolverBase {
     }
 
     return results;
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => User, { nullable: true })
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "read",
-    possession: "any",
-  })
-  async user(@graphql.Parent() parent: Wishlist): Promise<User | null> {
-    const result = await this.service.getUser(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
   }
 }

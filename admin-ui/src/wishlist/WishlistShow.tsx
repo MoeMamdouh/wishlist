@@ -5,9 +5,7 @@ import {
   ShowProps,
   TextField,
   DateField,
-  ReferenceField,
 } from "react-admin";
-import { USER_TITLE_FIELD } from "../user/UserTitle";
 
 export const WishlistShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -21,9 +19,6 @@ export const WishlistShow = (props: ShowProps): React.ReactElement => {
         <TextField label="linked_phone_number" source="linkedPhoneNumber" />
         <TextField label="status" source="status" />
         <DateField source="updatedAt" label="Updated At" />
-        <ReferenceField label="User" source="user.id" reference="User">
-          <TextField source={USER_TITLE_FIELD} />
-        </ReferenceField>
       </SimpleShowLayout>
     </Show>
   );

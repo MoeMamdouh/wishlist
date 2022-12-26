@@ -1,12 +1,11 @@
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { WishlistListRelationFilter } from "../wishlist/WishlistListRelationFilter";
+import { IntNullableFilter } from "../../util/IntNullableFilter";
 
 export type UserWhereInput = {
   firstName?: StringNullableFilter;
   id?: StringFilter;
   lastName?: StringNullableFilter;
-  test?: StringNullableFilter;
+  systemId?: IntNullableFilter;
   username?: StringFilter;
-  wishlists?: WishlistListRelationFilter;
 };

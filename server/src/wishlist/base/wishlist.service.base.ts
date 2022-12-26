@@ -10,7 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "nestjs-prisma";
-import { Prisma, Wishlist, Product, User } from "@prisma/client";
+import { Prisma, Wishlist, Product } from "@prisma/client";
 
 export class WishlistServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -56,13 +56,5 @@ export class WishlistServiceBase {
         where: { id: parentId },
       })
       .products(args);
-  }
-
-  async getUser(parentId: string): Promise<User | null> {
-    return this.prisma.wishlist
-      .findUnique({
-        where: { id: parentId },
-      })
-      .user();
   }
 }

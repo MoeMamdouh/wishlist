@@ -27,9 +27,6 @@ import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserUpdateInput } from "./UserUpdateInput";
 import { User } from "./User";
-import { WishlistFindManyArgs } from "../../wishlist/base/WishlistFindManyArgs";
-import { Wishlist } from "../../wishlist/base/Wishlist";
-import { WishlistWhereUniqueInput } from "../../wishlist/base/WishlistWhereUniqueInput";
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UserControllerBase {
@@ -56,7 +53,7 @@ export class UserControllerBase {
         id: true,
         lastName: true,
         roles: true,
-        test: true,
+        systemId: true,
         updatedAt: true,
         username: true,
       },
@@ -83,7 +80,7 @@ export class UserControllerBase {
         id: true,
         lastName: true,
         roles: true,
-        test: true,
+        systemId: true,
         updatedAt: true,
         username: true,
       },
@@ -111,7 +108,7 @@ export class UserControllerBase {
         id: true,
         lastName: true,
         roles: true,
-        test: true,
+        systemId: true,
         updatedAt: true,
         username: true,
       },
@@ -148,7 +145,7 @@ export class UserControllerBase {
           id: true,
           lastName: true,
           roles: true,
-          test: true,
+          systemId: true,
           updatedAt: true,
           username: true,
         },
@@ -184,7 +181,7 @@ export class UserControllerBase {
           id: true,
           lastName: true,
           roles: true,
-          test: true,
+          systemId: true,
           updatedAt: true,
           username: true,
         },
@@ -197,111 +194,5 @@ export class UserControllerBase {
       }
       throw error;
     }
-  }
-
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Wishlist",
-    action: "read",
-    possession: "any",
-  })
-  @common.Get("/:id/wishlists")
-  @ApiNestedQuery(WishlistFindManyArgs)
-  async findManyWishlists(
-    @common.Req() request: Request,
-    @common.Param() params: UserWhereUniqueInput
-  ): Promise<Wishlist[]> {
-    const query = plainToClass(WishlistFindManyArgs, request.query);
-    const results = await this.service.findWishlists(params.id, {
-      ...query,
-      select: {
-        addressId: true,
-        childName: true,
-        createdAt: true,
-        date: true,
-        id: true,
-        linkedPhoneNumber: true,
-        status: true,
-        updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  @common.Post("/:id/wishlists")
-  async connectWishlists(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: WishlistWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      wishlists: {
-        connect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  @common.Patch("/:id/wishlists")
-  async updateWishlists(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: WishlistWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      wishlists: {
-        set: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @nestAccessControl.UseRoles({
-    resource: "User",
-    action: "update",
-    possession: "any",
-  })
-  @common.Delete("/:id/wishlists")
-  async disconnectWishlists(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() body: WishlistWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      wishlists: {
-        disconnect: body,
-      },
-    };
-    await this.service.update({
-      where: params,
-      data,
-      select: { id: true },
-    });
   }
 }

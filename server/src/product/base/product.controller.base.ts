@@ -218,12 +218,6 @@ export class ProductControllerBase {
         linkedPhoneNumber: true,
         status: true,
         updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
     if (results === null) {

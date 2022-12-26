@@ -7,10 +7,9 @@ import {
   TextInput,
   PasswordInput,
   SelectArrayInput,
-  ReferenceArrayInput,
+  NumberInput,
 } from "react-admin";
 
-import { WishlistTitle } from "../wishlist/WishlistTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
 
 export const UserCreate = (props: CreateProps): React.ReactElement => {
@@ -26,16 +25,8 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           optionText="label"
           optionValue="value"
         />
-        <TextInput label="test" multiline source="test" />
+        <NumberInput step={1} label="system_id" source="systemId" />
         <TextInput label="Username" source="username" />
-        <ReferenceArrayInput
-          source="wishlists"
-          reference="Wishlist"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={WishlistTitle} />
-        </ReferenceArrayInput>
       </SimpleForm>
     </Create>
   );

@@ -79,7 +79,7 @@ class UserOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  test?: SortOrder;
+  systemId?: SortOrder;
 
   @ApiProperty({
     required: false,

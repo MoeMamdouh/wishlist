@@ -49,15 +49,7 @@ export class WishlistControllerBase {
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async create(@common.Body() data: WishlistCreateInput): Promise<Wishlist> {
     return await this.service.create({
-      data: {
-        ...data,
-
-        user: data.user
-          ? {
-              connect: data.user,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         addressId: true,
         childName: true,
@@ -67,12 +59,6 @@ export class WishlistControllerBase {
         linkedPhoneNumber: true,
         status: true,
         updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
   }
@@ -100,12 +86,6 @@ export class WishlistControllerBase {
         linkedPhoneNumber: true,
         status: true,
         updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
   }
@@ -134,12 +114,6 @@ export class WishlistControllerBase {
         linkedPhoneNumber: true,
         status: true,
         updatedAt: true,
-
-        user: {
-          select: {
-            id: true,
-          },
-        },
       },
     });
     if (result === null) {
@@ -167,15 +141,7 @@ export class WishlistControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: {
-          ...data,
-
-          user: data.user
-            ? {
-                connect: data.user,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           addressId: true,
           childName: true,
@@ -185,12 +151,6 @@ export class WishlistControllerBase {
           linkedPhoneNumber: true,
           status: true,
           updatedAt: true,
-
-          user: {
-            select: {
-              id: true,
-            },
-          },
         },
       });
     } catch (error) {
@@ -227,12 +187,6 @@ export class WishlistControllerBase {
           linkedPhoneNumber: true,
           status: true,
           updatedAt: true,
-
-          user: {
-            select: {
-              id: true,
-            },
-          },
         },
       });
     } catch (error) {

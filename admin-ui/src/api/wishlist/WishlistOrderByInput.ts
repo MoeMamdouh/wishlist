@@ -9,5 +9,4 @@ export type WishlistOrderByInput = {
   linkedPhoneNumber?: SortOrder;
   status?: SortOrder;
   updatedAt?: SortOrder;
-  userId?: SortOrder;
 };
