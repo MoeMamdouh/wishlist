@@ -10,11 +10,9 @@ import {
   ReferenceArrayInput,
   SelectArrayInput,
   SelectInput,
-  ReferenceInput,
 } from "react-admin";
 
 import { ProductTitle } from "../product/ProductTitle";
-import { UserTitle } from "../user/UserTitle";
 
 export const WishlistCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -43,9 +41,6 @@ export const WishlistCreate = (props: CreateProps): React.ReactElement => {
           allowEmpty
           optionValue="value"
         />
-        <ReferenceInput source="user.id" reference="User" label="User">
-          <SelectInput optionText={UserTitle} />
-        </ReferenceInput>
       </SimpleForm>
     </Create>
   );

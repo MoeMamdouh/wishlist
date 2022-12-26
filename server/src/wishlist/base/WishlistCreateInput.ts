@@ -22,7 +22,6 @@ import {
 import { Type } from "class-transformer";
 import { ProductCreateNestedManyWithoutWishlistsInput } from "./ProductCreateNestedManyWithoutWishlistsInput";
 import { EnumWishlistStatus } from "./EnumWishlistStatus";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 @InputType()
 class WishlistCreateInput {
   @ApiProperty({
@@ -85,17 +84,5 @@ class WishlistCreateInput {
     nullable: true,
   })
   status?: "Option_1" | "Option_2" | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => UserWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => UserWhereUniqueInput)
-  @IsOptional()
-  @Field(() => UserWhereUniqueInput, {
-    nullable: true,
-  })
-  user?: UserWhereUniqueInput | null;
 }
 export { WishlistCreateInput };

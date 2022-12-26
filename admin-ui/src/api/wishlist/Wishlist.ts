@@ -1,5 +1,4 @@
 import { Product } from "../product/Product";
-import { User } from "../user/User";
 
 export type Wishlist = {
   addressId: number | null;
@@ -11,5 +10,4 @@ export type Wishlist = {
   products?: Array<Product>;
   status?: "Option_1" | "Option_2" | null;
   updatedAt: Date;
-  user?: User | null;
 };

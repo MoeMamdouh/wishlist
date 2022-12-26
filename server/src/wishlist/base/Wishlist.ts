@@ -22,7 +22,6 @@ import {
 import { Type } from "class-transformer";
 import { Product } from "../../product/base/Product";
 import { EnumWishlistStatus } from "./EnumWishlistStatus";
-import { User } from "../../user/base/User";
 @ObjectType()
 class Wishlist {
   @ApiProperty({
@@ -106,14 +105,5 @@ class Wishlist {
   @Type(() => Date)
   @Field(() => Date)
   updatedAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: () => User,
-  })
-  @ValidateNested()
-  @Type(() => User)
-  @IsOptional()
-  user?: User | null;
 }
 export { Wishlist };

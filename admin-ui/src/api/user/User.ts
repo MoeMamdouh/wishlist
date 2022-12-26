@@ -1,5 +1,4 @@
 import { JsonValue } from "type-fest";
-import { Wishlist } from "../wishlist/Wishlist";
 
 export type User = {
   createdAt: Date;
@@ -7,8 +6,7 @@ export type User = {
   id: string;
   lastName: string | null;
   roles: JsonValue;
-  test: string | null;
+  systemId: number | null;
   updatedAt: Date;
   username: string;
-  wishlists?: Array<Wishlist>;
 };

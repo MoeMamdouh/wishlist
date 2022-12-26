@@ -19,7 +19,6 @@ import { DateTimeFilter } from "../../util/DateTimeFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { ProductListRelationFilter } from "../../product/base/ProductListRelationFilter";
 import { EnumWishlistStatus } from "./EnumWishlistStatus";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 @InputType()
 class WishlistWhereInput {
   @ApiProperty({
@@ -99,17 +98,5 @@ class WishlistWhereInput {
     nullable: true,
   })
   status?: "Option_1" | "Option_2";
-
-  @ApiProperty({
-    required: false,
-    type: () => UserWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => UserWhereUniqueInput)
-  @IsOptional()
-  @Field(() => UserWhereUniqueInput, {
-    nullable: true,
-  })
-  user?: UserWhereUniqueInput;
 }
 export { WishlistWhereInput };
